@@ -1,29 +1,25 @@
-package com.std.sdd.article.entity;
+package com.std.sdd.answer.entity;
 
-import com.std.sdd.answer.entity.Answer;
+import com.std.sdd.article.entity.Article;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
 
 import java.time.LocalDateTime;
-import java.util.List;
 
+@Entity
 @Getter
 @Setter
-@Entity
-public class Article {
+public class Answer {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
-
-    @Column(length = 200)
-    private String subject;
 
     @Column(columnDefinition = "TEXT")
     private String content;
 
     private LocalDateTime createDate;
 
-    @OneToMany(mappedBy = "article", cascade = CascadeType.REMOVE)
-    private List<Answer> answerList;
+    @ManyToOne
+    private Article article;
 }

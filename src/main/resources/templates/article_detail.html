@@ -1,6 +1,18 @@
 <html layout:decorate="~{layout}">
 <div layout:fragment="content" class="container">
-<span>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Corporis hic laborum possimus sit. Amet aperiam aspernatur atque id ipsam magnam praesentium quae sed. Aperiam mollitia nobis nulla officia quo repellendus.</span>
-    <a th:href="@{/article/list}"  class="btn btn-primary">목록</a>
+    <h2 th:text="${article.subject}"></h2>
+    <div th:text="${article.content}"></div>
+    <h5 th:text="|${#lists.size(article.answerList)}개의 답변이 존재합니다|"></h5>
+    <div>
+        <ul>
+            <li th:each="answer : ${article.answerList}" th:text="${answer.content}"></li>
+        </ul>
+    </div>
+    <form th:action="@{|/answer/create/${article.id}|}" th:object="${answerForm}" method="post">
+        <div th:replace="~{errors_form :: errorsForm}"></div>
+        <textarea th:field="*{content}"  rows="10"></textarea>
+        <input type="submit" class="btn btn-primary py-1" value="답변등록">
+    </form>
+    <a th:href="@{/article/list}"  class="btn btn-primary my-5">목록</a>
 </div>
 </html>

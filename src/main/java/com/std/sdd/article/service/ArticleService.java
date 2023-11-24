@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.Optional;
 
 @RequiredArgsConstructor
 @Service
@@ -18,7 +19,10 @@ public class ArticleService {
         List<Article> articleList = this.articleRepository.findAll();
         return articleList;
     }
-
+    public Article getArticle(Integer id){
+        Optional<Article> oa = this.articleRepository.findById(id);
+        return oa.get();
+    }
     public void create(String subject, String content){
         Article article = new Article();
         article.setSubject(subject);
