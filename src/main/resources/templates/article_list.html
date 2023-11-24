@@ -1,0 +1,25 @@
+<html layout:decorate="~{layout}">
+<div layout:fragment="content" class="container">
+    <table>
+        <thead>
+        <tr>
+            <th>번호</th>
+            <th>제목</th>
+            <th>내용</th>
+            <th>작성일자</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="article : ${articleList}">
+            <td th:text="${article.id}"></td>
+            <td>
+                <a th:href="@{|/article/detail/${article.id}|}" th:text="${article.subject}"></a>
+            </td>
+            <td th:text="${article.content}"></td>
+            <td th:text="${article.createDate}"></td>
+        </tr>
+        </tbody>
+    </table>
+    <a th:href="@{/article/create}" class="btn btn-primary">답변등록</a>
+</div>
+</html>
